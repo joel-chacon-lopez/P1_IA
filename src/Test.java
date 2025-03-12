@@ -65,9 +65,13 @@ public class Test {
         System.out.println("Heuristica 1: Comparacio d'altures");
         imprimirResultat(bf.cerca(matrix, inici, fi, h1));
 
+        System.out.println("-----------------------------");
+
         System.out.println("Heuristica 2: Distancia Euclidiana");
         imprimirResultat(bf.cerca(matrix, inici, fi, h2));
         
+        System.out.println("-----------------------------");
+
         System.out.println("Heuristica 3: Distancia Manhattan");
         imprimirResultat(bf.cerca(matrix, inici, fi, h3));
 
