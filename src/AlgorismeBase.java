@@ -12,7 +12,7 @@ public abstract class AlgorismeBase {
             int x = n.getX() + moviment[0];
             int y = n.getY() + moviment[1];
             if (x >= 0 && x < 10 && y >= 0 && y < 10 && matrix[x][y] != -1) {
-                double cost = (matrix[x][y] >= n.getAltura()) ? 1 + n.getCost() + (matrix[x][y] - n.getAltura()) : 0.5 + n.getCost();
+                double cost = n.getCost() + ((matrix[x][y] >= n.getAltura()) ? 1 + (matrix[x][y] - n.getAltura()) : 0.5);
                 Node germà = new Node(x, y, matrix[x][y], cost, n);
                 germans.add(germà);
             }

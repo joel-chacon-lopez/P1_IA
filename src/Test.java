@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Test {
     private static int[][] matrix = new int[10][10];
@@ -51,29 +49,52 @@ public class Test {
         }
     }
     public static void main(String[] args) {
-        System.out.println("Tauler 1: ");
-        readTxt("mapa.txt");
-        mostraTauler(matrix);
+        try (Scanner sc = new Scanner(System.in)) {
 
-        Node inici = new Node(0, 0, matrix[0][0]);
-        Node fi = new Node(9, 9, matrix[9][9]);
-        Heuristica h1 = new Heuristica1();
-        Heuristica h2 = new Heuristica2();
-        Heuristica h3 = new Heuristica3();
-        AlgorismeBase bf = new BestFirst();
+            while (true) {
+                System.out.println("Escull tauler: (1 o 2)");
+                while (true) {
+                    int tauler = sc.nextInt();
+                    if (tauler == 1 || tauler == 2) {
+                        readTxt("mapa" + tauler + ".txt");
+                        break;
+                    } else {
+                        System.out.println("Tauler no vàlid, torna a intentar-ho");
+                    }
+                }
+                mostraTauler(matrix);
+                
+                Node inici = new Node(0, 0, matrix[0][0]);
+                Node fi = new Node(9, 9, matrix[9][9]);
+                Heuristica h1 = new Heuristica1();
+                Heuristica h2 = new Heuristica2();
+                Heuristica h3 = new Heuristica3();
+                AlgorismeBase bf = new BestFirst();
+                AlgorismeBase a = new AStar();
 
-        System.out.println("Heuristica 1: Comparacio d'altures");
-        imprimirResultat(bf.cerca(matrix, inici, fi, h1));
+                System.out.println("-----------------------------");
+                System.out.println("Heuristica 1: Comparacio d'altures");
+                System.out.println("Best First:");
+                imprimirResultat(bf.cerca(matrix, inici, fi, h1));
+                System.out.println("A*:");
+                imprimirResultat(a.cerca(matrix, inici, fi, h1));
 
-        System.out.println("-----------------------------");
+                System.out.println("-----------------------------");
 
-        System.out.println("Heuristica 2: Distancia Euclidiana");
-        imprimirResultat(bf.cerca(matrix, inici, fi, h2));
-        
-        System.out.println("-----------------------------");
+                System.out.println("Heuristica 2: Distancia Euclidiana");
+                System.out.println("Best First:");
+                imprimirResultat(bf.cerca(matrix, inici, fi, h2));
+                System.out.println("A*:");
+                imprimirResultat(a.cerca(matrix, inici, fi, h2));
+                
+                System.out.println("-----------------------------");
 
-        System.out.println("Heuristica 3: Distancia Manhattan");
-        imprimirResultat(bf.cerca(matrix, inici, fi, h3));
-
+                System.out.println("Heuristica 3: Distancia Manhattan");
+                System.out.println("Best First:");
+                imprimirResultat(bf.cerca(matrix, inici, fi, h3));
+                System.out.println("A*:");
+                imprimirResultat(a.cerca(matrix, inici, fi, h3));
+            }
+        }        
     }
 }
