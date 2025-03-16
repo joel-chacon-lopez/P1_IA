@@ -21,7 +21,7 @@ public class AStar extends AlgorismeBase {
             //System.out.println("Llista de visitats: " + visitats.toString());
             //System.out.println("Node actual: (" + actual.getX() + "," + actual.getY() + ")");
 
-            if (actual.equals(desti)) return actual;
+            if (actual.equals(desti)) { System.out.println("Total de nodes visitats: " + visitats.size()); return actual;}
 
             visitats.add(actual.x + "," + actual.y);
             pends.remove(actual);
